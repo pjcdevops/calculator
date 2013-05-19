@@ -144,7 +144,8 @@ function get_optional_final_payment($car_price, $rv_percent){
 * @param float $finance_amount 
 * @return float
 */
-function get_monthly_payment($apr, $optional_final_payment, $term, $finance_amount){
+
+function get_monthly_payment($apr, $optional_final_payment, $term, $finance_amount, $test){
 	//arguments to PVT excel function
 	$pvt_arg1 = $apr / 12;
 	$pvt_arg2 = 1;
@@ -156,7 +157,7 @@ function get_monthly_payment($apr, $optional_final_payment, $term, $finance_amou
 	$pmt_arg2 = $term;
 	$pmt_arg3 = - $finance_amount;
 	$pmt_arg4 = PHPExcel_Calculation::getInstance()->calculateFormula($formula);
-
+    
 	$formula = '=PMT(' . $pmt_arg1 . ',' . $pmt_arg2 . ',' . $pmt_arg3 . ',' .  $pmt_arg4 . ')';
 
 	return round(PHPExcel_Calculation::getInstance()->calculateFormula($formula), 2);
@@ -217,7 +218,7 @@ $rv_percent = get_rv_percent($mysqli, $rv_key);
 //get optional final payment
 $optional_final_payment = get_optional_final_payment($car_price, $rv_percent);
 //calculate the monthly and weekly payments
-$monthly = get_monthly_payment($apr, $term, $optional_final_payment, $finance_amount);
+$monthly = get_monthly_payment($apr, $optional_final_payment, $term, $finance_amount);
 $weekly = get_weekly_payment($monthly);
 
 /***************************************
@@ -237,3 +238,12 @@ $result['optional_final_payment'] = number_format($optional_final_payment);
 
 echo json_encode($result);
 
+/*$test = array();
+$test['rv_key'] = $rv_key;
+$test['rv_percent'] = $rv_percent;
+$test['apr'] = $apr;
+$test['pv_args'] = array($apr / 12, 1, -$optional_final_payment);
+$test['pmt_args'] = array($apr /12, $term, - $finance_amount);
+
+
+//echo json_encode($test);
