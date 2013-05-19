@@ -52,19 +52,25 @@ table {
 body {font-family: arial; background-color: #d9d9d9;}
 
 #logo {position: absolute; top: 0; left: 0;}
-#header {height: 80px;  background-color: #333333;}
+#header {height: 80px;  background-color: #333333; padding: 1px;}
+h1 {margin: 30px 0px 0px 140px; color: #ffffff; font-size: 18px;}
 
-#container {width: 725px;  padding: 10px; margin: 0 auto;  overflow: auto;}
+#container {width: 725px;  padding: 10px; margin: 110px auto;  overflow: auto;}
 
-form { width: 100%; overflow: auto;  border: solid black 1px; }
+form { width: 600px; margin: 0 auto;  overflow: auto; }
 
-.row { margin-bottom: 10px; overflow: auto; }
+.row { margin-bottom: 5px; overflow: auto; position: relative; height: 55px;}
 
-.field_input { float: right; width: 70%; }
-input { width: 100%; height: 35px; font-size: 20px; }  
+.field_input {width:98%; background-color: #fff; border-radius: 5px;  padding: 5px; overflow: auto;}
+input { width: 93%; height: 35px; font-size: 1.66em; border: none; float: right;} 
+input:focus {outline: none;}
+.euro { float: left; font-size: 34px; padding-top: 1px; }
 
-.field_select { float: right; width: 70%;  }
+.field_select { width: 98%;  background-color: #fff; border-radius: 5px; padding: 5px;}
+select { width: 100%; position: static;  padding: 5px; font-size: 1.66em; /* line-height: 2.66em;*/ border: 0; border-radius: 0; height: 44px; cursor: pointer; }
+select:focus {outline: none;}
 
-select { background: none; width: 100%; padding: 5px; font-size: 2.66em; /* line-height: 2.66em;*/ border: 0; border-radius: 0; height: 64px; background: none; -webkit-appearance: none; }
+
+.arrow { height: 54px; width: 54px; position: absolute; top: 0; right: 0; z-index: 10;  border-radius: 0px 5px 5px 0px; cursor: pointer; background:#333333  url('../img/select_arrow.png') no-repeat center center; pointer-events: none; }
 
 .label { float: left; font-size: 20px; padding-top: 6px; }

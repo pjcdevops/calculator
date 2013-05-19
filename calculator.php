@@ -16,18 +16,24 @@ $car_versions = $mysqli->query('SELECT version FROM versions');
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/calculator.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
-<script type="text/javascript" src="js.js"></script>
+<script type="text/javascript" src="js/js.js"></script>
 </head>
 <body>
+<div id="header">
+<img src="img/logo.png" id="logo"/>
+<h1>Nissan PCP Calculator</h1>
+</div>
 	<div id="container">
-		<div id="calc-container" class="left">
-		<form method="post">
-		<div id="header">NISSAN PCP CALCULATOR</div>
-			<div class="row-sel" id="row-1">
-				<span class="label-select">MODEL</span>
-				<select name="model" class="right">
+        <form method="post">
+            <div class="step_header">
+            STEP 1
+            </div>
+            <div class="step_desc">Choose Car Model, Version and Mileage</div>
+            <div class="field_select row clear" id="row-1">
+                <div class="arrow"></div>
+				<select name="model" class="">
 					<?php
 					// loop through car models and output with select option markup
 						while($car_model = $car_models->fetch_assoc())
@@ -35,9 +41,9 @@ $car_versions = $mysqli->query('SELECT version FROM versions');
 					?>
 				</select>
 			</div>
-			<div class="row-sel" id="row-2">
-				<span class="label-select">VERSION</span>
-				<select name="version" class="right">
+            <div class="field_select row clear" id="row-2">
+                <div class="arrow"></div>
+				<select name="version" class="">
 					<?php 
 					// loop through car versions and output with select option markup
 						while($car_version = $car_versions->fetch_assoc())
@@ -45,81 +51,65 @@ $car_versions = $mysqli->query('SELECT version FROM versions');
 					?>
 				</select>
 			</div>
-			<div class="row-sel" id="row-3">
-				<span class="label-select">MILEAGE</span>
-				<select name="mileage" class="right">
+            <div class="field_select row clear" id="row-3">
+                <div class="arrow"></div>
+				<select name="mileage" class="">
 						<option>10000</option>
 						<option>15000</option>
 						<option>20000</option>
 						<option>25000</option>
 						<option>30000</option>
 				</select>
+            </div>
+            <div class="buffer"></div>
+            <div class="step_header">
+            STEP 2
+            </div>
+            <div class="step_desc">Provide values for any options, accessories, discounts, and deposit</div>
+            <div class="field_input row clear" id="options">
+                <div class="euro">&euro;</div>
+				<input name="options" class="input"/>
 			</div>
-			<div class="row" id="price">
-				<span class="label">PRICE</span>
-				<span class="amount right"></span>
+			<div class="field_input row clear" id="accessories">
+                <div class="euro">&euro;</div>
+                <input name="accessories" class="input"/>
 			</div>
-			<div class="row" id="options">
-			<div class="exclamation">!</div>
-				<span class="label">OPTIONS</span>
-				<input name="options" class="amount right"/>
+            <div class="field_input row clear" id="discounts">
+                <div class="euro">&euro;</div>
+                <input name="discounts" class="input"/>
 			</div>
-			<div class="row" id="accessories">
-				<div class="exclamation">!</div>
-				<span class="label">ACCESSORIES</span>
-				<input name="accessories" class="amount right"/>
+			<div class="field_input row clear" id="deposit">
+                <div class="euro">&euro;</div>
+				<input name="deposit" class="input"/>
 			</div>
-			<div class="row" id="discounts">
-			<div class="exclamation">!</div>
-				<span class="label">DISCOUNTS</span>
-				<input name="discounts" class="amount right"/>
-			</div>
-			<div class="row" id="new_price">
-				<span class="label">NEW PRICE</span>
-				<span class="amount right"></span>
-			</div>
-			<div class="row" id="deposit">
-			<div class="exclamation">!</div>
-				<span class="label">DEPOSIT</span>
-				<input name="deposit" class="amount right"/>
-			</div>
-			<div class="row" id="finance_amount">
-				<span class="label">FINANCE AMOUNT</span>
-				<span class="amount right"></span>
-			</div>
-			<div class="row" id="term-sel">
-				<span class="label">TERM</span>
-				<select name="term" class="right">
+            <div class="buffer"></div>
+            <div class="step_header">
+            STEP 3
+            </div>
+            <div class="step_desc">Choose the repayment term</div>
+            <div class="field_select row clear" id="term-sel">
+                <div class="arrow"></div>
+				<select name="term" class="">
 						<option>24</option>
 						<option>36</option>
 				</select>
 			</div>
-			<div class="row" id="term">
-				<span class="label">TERM</span>
-				<span class="amount right"></span>
-			</div>
-			<div class="row" id="apr">
-				<span class="label">APR</span>
-				<span class="amount right"></span>
-			</div>
-			<div class="row" id="optional_final_payment">
-				<span class="label">OPTIONAL FINAL PAYMENT</span>
-				<span class="amount right"></span>
-			</div>
-			<div class="buffer-20"></div>
-			<div class="row" id="monthly_payment">
-				<span class="label">MONTHLY PAYMENT</span>
-				<span class="amount right"></span>
-			</div>
-			<div class="row" id="weekly_payment">
-				<span class="label">WEEKLY PAYMENT</span>
-				<span class="amount right"></span>
-			</div>
-			<br/><br/>
+            <div class="buffer"></div>
 			<input type="submit" id="submit" value="Calculate">
-		</form>
-		</div>
-		<div id="model_image" class="left"></div>
-	</div>
+        </form>
+        
+        <div id="submit_container"><div id="submit">Calculate Quote</div></div>
+        <div id="quote">
+            <div id="quote_header">Your Quote</div>
+            <div id="" class="quote_row">
+                <div class="quote_label">Weekly Payment</div>
+                <div class="quote_data" id="weekly_payment"></div>
+            </div>
+            <div id="" class="quote_row">
+                <div class="quote_label">Monthly Payment</div>
+                <div class="quote_data" id="monthly_payment"></div>
+            </div>
+        </div>   
+ </div>
 </body>
 </html>
