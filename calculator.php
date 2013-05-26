@@ -16,8 +16,10 @@ $car_versions = $mysqli->query('SELECT version FROM versions');
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
 <link rel="stylesheet" href="css/calculator.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" ></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript"  src="js/formyoda.js"></script>
 <script type="text/javascript" src="js/js.js"></script>
 </head>
 <body>
@@ -26,7 +28,7 @@ $car_versions = $mysqli->query('SELECT version FROM versions');
 <h1>Nissan PCP Calculator</h1>
 </div>
 	<div id="container">
-        <form method="post">
+        <form method="post" id="calc">
             <div class="step_header">
             STEP 1
             </div>
@@ -61,32 +63,36 @@ $car_versions = $mysqli->query('SELECT version FROM versions');
 						<option>30000</option>
 				</select>
             </div>
-            <div class="buffer"></div>
+            <div class="buffer">
+                <div class="ruler"></div>
+            </div>
             <div class="step_header">
             STEP 2
             </div>
-            <div class="step_desc">Provide values for any options, accessories, discounts, and deposit</div>
+            <div class="step_desc">Provide a euro value  for any options, accessories, discounts, and deposit</div>
             <div class="field_input row clear" id="options">
                 <div class="euro">&euro;</div>
-				<input name="options" class="input"/>
+				<input name="options" id="options_input"  class="input"/>
 			</div>
 			<div class="field_input row clear" id="accessories">
                 <div class="euro">&euro;</div>
-                <input name="accessories" class="input"/>
+                <input name="accessories" id="accessories_input"  class="input"/>
 			</div>
             <div class="field_input row clear" id="discounts">
                 <div class="euro">&euro;</div>
-                <input name="discounts" class="input"/>
+                <input name="discounts" id="discounts_input"  class="input"/>
 			</div>
 			<div class="field_input row clear" id="deposit">
                 <div class="euro">&euro;</div>
-				<input name="deposit" class="input"/>
+				<input name="deposit" id="deposit_input"  class="input"/>
 			</div>
-            <div class="buffer"></div>
+            <div class="buffer">
+                <div class="ruler"></div>
+            </div>
             <div class="step_header">
             STEP 3
             </div>
-            <div class="step_desc">Choose the repayment term</div>
+            <div class="step_desc">Choose the repayment term in months</div>
             <div class="field_select row clear" id="term-sel">
                 <div class="arrow"></div>
 				<select name="term" class="">
@@ -94,13 +100,18 @@ $car_versions = $mysqli->query('SELECT version FROM versions');
 						<option>36</option>
 				</select>
 			</div>
-            <div class="buffer"></div>
-			<input type="submit" id="submit" value="Calculate">
+            <div class="buffer">
+                <div class="ruler"></div>
+            </div>
         </form>
         
-        <div id="submit_container"><div id="submit">Calculate Quote</div></div>
+        <div id="submit_container"><button id="submit_button" class ="btn btn-large btn-inverse">Calculate Quote</button></div>
         <div id="quote">
             <div id="quote_header">Your Quote</div>
+            <div id="" class="quote_row">
+                <div class="quote_label">Final Price</div>
+                <div class="quote_data" id="final_price"></div>
+            </div>
             <div id="" class="quote_row">
                 <div class="quote_label">Weekly Payment</div>
                 <div class="quote_data" id="weekly_payment"></div>
